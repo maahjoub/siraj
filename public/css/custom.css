@@ -1,0 +1,20 @@
+.count {
+    font-size: 18px;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+}
+.navcustom{
+    position: fixed;
+    width: 100vw;
+    z-index: 999900;
+}
+.content{
+    margin-top: 55px;
+}
+#datatable_paginate, .dataTables_filter{
+    float: left;
+}
+.margintop {
+    margin-top: 60px;
+}
