@@ -1,0 +1,109 @@
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Student;
+
+class StudentController extends Controller
+{
+    public function getByDate(Request $request)
+    {
+        $date = $request->input('date');
+
+        if (!$date) {
+            return response()->json([], 400);
+        }
+
+        $students = Student::whereDate('created_at', $date)->get();
+
+        return response()->json($students);
+    }
+}
+
+
+use App\Http\Controllers\StudentController;
+
+Route::get('/students', function () {
+    return view('students');
+});
+
+Route::get('/students-by-date', [StudentController::class, 'getByDate'])->name('students.byDate');
+
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>قائمة الطلاب</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <!-- CSS الخاص بـ DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- JavaScript الخاص بـ DataTables -->
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+
+    <h2>عرض الطلاب حسب تاريخ الإنشاء</h2>
+
+    <label for="filter_date">اختر تاريخ:</label>
+    <input type="date" id="filter_date">
+    <button id="filterBtn">بحث</button>
+
+    <br><br>
+
+    <table id="studentsTable" class="display">
+        <thead>
+            <tr>
+                <th>الرقم</th>
+                <th>الاسم</th>
+                <th>البريد الإلكتروني</th>
+                <th>تاريخ الإنشاء</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- راح نملأه بالجافاسكربت -->
+        </tbody>
+    </table>
+
+    <script>
+        $(document).ready(function () {
+            let table = $('#studentsTable').DataTable();
+
+            $('#filterBtn').on('click', function () {
+                let date = $('#filter_date').val();
+
+                if (!date) {
+                    alert("يرجى اختيار التاريخ");
+                    return;
+                }
+
+                $.ajax({
+                    url: '{{ route("students.byDate") }}',
+                    method: 'GET',
+                    data: { date: date },
+                    success: function (response) {
+                        table.clear(); // مسح البيانات القديمة
+
+                        response.forEach(function (student) {
+                            table.row.add([
+                                student.id,
+                                student.name,
+                                student.email,
+                                student.created_at
+                            ]).draw(false);
+                        });
+                    },
+                    error: function (xhr) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
