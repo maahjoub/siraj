@@ -14,7 +14,7 @@
                 <span class="invoice-id fs-3 p-2 m-2 text-center"> رقم الايصال :   {{ $stdinvoice->uuid }}</span>
             </div>
             <div class="name">
-                <table class="table border table-bordered bg-secondary text-white">
+                <table class="table border pay-border table-bordered ">
                     <thead>
                     <tr>
                         <th>    اسم الرسوم    </th>
@@ -29,8 +29,14 @@
                     </tr>
 
                     <tr>
+                        <th>    المبلغ الكلي   </th>
+                        <th>    700000 </th></th>
                         <th>    المبلغ المدفوع   </th>
                         <th>    {{ $stdinvoice->amount }} </th></th>
+                    </tr>
+                    <tr>
+                        <th>    التحفيض</th>
+                        <th>    {{ $stdinvoice->discount }} </th></th>
                         <th>    المبلغ المتبقي   </th>
                         <th>    {{(700000 - $paidinvoice) }} </th></th>
                     </tr>

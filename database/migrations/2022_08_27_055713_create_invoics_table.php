@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('uuid');
             $table->string('name');
             $table->bigInteger('amount');
+            $table->double('discount', 8,2)->nullable();
             $table->text('note')->nullable();
             $table->enum('payment_method', ['كاش', 'بنكك', 'اوكاش', 'فوري', 'اخري'])->nullable();
             $table->foreignId('student_id')->references('id')

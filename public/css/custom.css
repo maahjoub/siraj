@@ -18,3 +18,10 @@
 .margintop {
     margin-top: 60px;
 }
+.img-logo1 {
+    z-index: 99999;
+    opacity: .2;
+}
+.pay-border {
+    border-color: black !important;
+}

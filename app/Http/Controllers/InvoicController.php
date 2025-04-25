@@ -34,6 +34,7 @@ class InvoicController extends Controller
         $stdinvoice = Invoic::where('student_id', $id)->latest()->first();
         $student = Student::where('id', $id)->first();
         $paidinvoice = Invoic::where('student_id', $id)->sum('amount');
+        
         return view('invoice.print', compact(['stdinvoice', 'student', 'paidinvoice']));
     }
     /**
@@ -47,6 +48,14 @@ class InvoicController extends Controller
         return view('invoice.create', compact(['studentId', 'statusValues']));
     }
 
+    public function payment(Request $request)
+    {
+        $today = now()->format('y-m-d');
+        // if($request->)
+        $payment = Student::with('invoice')->where('created_at', $today )->get();
+        dd($payment);
+        return view('invoice.payment');
+    }
     /**
      * Store a newly created resource in storage.
      *

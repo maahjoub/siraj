@@ -36,7 +36,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/pay/{id}', [InvoicController::class, 'PayInvoice'])->name('invoice.pay');
     Route::get('/base-stage', [HomeController::class, 'bDetails'])->name('base.details');
     Route::post('student/search', [StudentController::class, 'search'])->name('student.search');
-
+    Route::get('/students-by-date', [StudentController::class, 'getByDate'])->name('students.byDate');
+    Route::get('/payment/invoice', [InvoicController::class, 'payment'])->name('invoice.payment');
+    
     // Resource Routes
     Route::resource('student', StudentController::class);
     Route::resource('invoice', InvoicController::class);

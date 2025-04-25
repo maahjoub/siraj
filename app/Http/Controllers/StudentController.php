@@ -106,6 +106,18 @@ class StudentController extends Controller
         $classes = ClassRom::where('phase_id', $id)->get();
         return view('student.allclass', compact(['classes']));
     }
+    public function getByDate(Request $request)
+    {
+        $date = $request->input('date');
+
+        if (!$date) {
+            return response()->json([], 400);
+        }
+
+        $students = Student::whereDate('created_at', $date)->get();
+
+        return response()->json($students);
+    }
     
     public function showAllstudent ($id)
     {

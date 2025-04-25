@@ -50,7 +50,7 @@
                   </li>
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('student.create') }}"> اضاقة تلميذ</a>
+                            <a class="nav-link" href="{{ route('invoice.payment') }}"> اليومية</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('invoice.index') }}">الفواتير</a>
@@ -114,6 +114,42 @@
         $('#datatable').DataTable();
     } );
 </script>
+
+ <script>
+        $(document).ready(function () {
+            let table = $('#studentsTable').DataTable();
+
+            $('#filterBtn').on('click', function () {
+                let date = $('#filter_date').val();
+
+                if (!date) {
+                    alert("يرجى اختيار التاريخ");
+                    return;
+                }
+
+                $.ajax({
+                    url: '{{ route("students.byDate") }}',
+                    method: 'GET',
+                    data: { date: date },
+                    success: function (response) {
+                        table.clear(); // مسح البيانات القديمة
+
+                        response.forEach(function (student) {
+                            table.row.add([
+                                student.id,
+                                student.name,
+                                student.email,
+                                student.created_at
+                            ]).draw(false);
+                        });
+                    },
+                    error: function (xhr) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
 @if (App::getLocale() == 'en')
     <script src="{{ URL::asset('assets/js/bootstrap-datatables/en/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::asset('assets/js/bootstrap-datatables/en/dataTables.bootstrap4.min.js') }}"></script>
