@@ -18,7 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('assets/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
-
+    
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
@@ -26,6 +26,7 @@
 </head>
 <body>
 <div id="app">
+
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm navcustom">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
@@ -97,11 +98,13 @@
             </div>
         </div>
     </nav>
-    <main class="py-4">
-        <div class="margintop">
-            @yield('content')
-        </div>
-    </main>
+    <div class="watermark">
+        <main class="py-4">
+            <div class="margintop">
+                @yield('content')
+            </div>
+        </main>
+    </div>
 </div>
 @yield('js')
 {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> --}}

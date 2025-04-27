@@ -18,10 +18,28 @@
 .margintop {
     margin-top: 60px;
 }
-.img-logo1 {
+.img-logo1, .img-logo2 {
     z-index: 99999;
     opacity: .2;
 }
 .pay-border {
     border-color: black !important;
+}
+.watermark {
+    position: relative;
+    min-height: 100vh;
+}
+.watermark::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('http://127.0.0.1:8000/image/1.jpeg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    opacity: 0.1;
+    z-index: -1;
 }

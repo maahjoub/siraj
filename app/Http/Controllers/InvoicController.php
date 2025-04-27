@@ -27,15 +27,20 @@ class InvoicController extends Controller
             'uuid' => random_int($min =1000,$max= 99999),
             'name' => $request->name,
             'amount' => $request->money,
+            'discount' => $request->discount,
             'payment_method'=> $request->payment_method,
+            'payment_number'=> $request->payment_number,
             'note' => $request->note,
             'student_id' => $id,
         ]);
         $stdinvoice = Invoic::where('student_id', $id)->latest()->first();
         $student = Student::where('id', $id)->first();
         $paidinvoice = Invoic::where('student_id', $id)->sum('amount');
+        $allamount = Invoic::where('student_id', $student->id)->sum('amount');
+        $discount = Invoic::where('student_id', $student->id)->first('discount');
         
-        return view('invoice.print', compact(['stdinvoice', 'student', 'paidinvoice']));
+        
+        return view('invoice.print', compact(['stdinvoice', 'student', 'paidinvoice', 'discount', 'allamount']));
     }
     /**
      * Show the form for creating a new resource.
@@ -50,11 +55,9 @@ class InvoicController extends Controller
 
     public function payment(Request $request)
     {
-        $today = now()->format('y-m-d');
-        // if($request->)
-        $payment = Student::with('invoice')->where('created_at', $today )->get();
-        dd($payment);
-        return view('invoice.payment');
+        $today = now()->format('Y-m-d');
+        $payment = Student::with('invoice')->get();
+        return view('invoice.payment', compact('payment', 'today'));
     }
     /**
      * Store a newly created resource in storage.
@@ -62,9 +65,12 @@ class InvoicController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function search(Request $request)
     {
-        //
+        $searchDate = \Carbon\Carbon::parse($request->search)->format('Y-m-d');
+        $resolt = Invoic::whereDate('created_at', $searchDate)->get();
+        $search_payment = Student::with('invoice')->get();
+        return view('invoice.payment', compact('resolt', 'search_payment', 'searchDate'));
     }
 
     /**
@@ -75,10 +81,12 @@ class InvoicController extends Controller
      */
     public function show(Invoic $invoic, $id)
     {
+       
         $paidinvoice = Invoic::where('student_id', $id)->sum('amount');
         $student = Student::where('id', $id)->first();
-        $invoices = Invoic::where('student_id', $id)->paginate(5);
-        return view('invoice.show', compact(['invoices', 'student', 'paidinvoice']));
+        $invoices = Invoic::where('student_id', $id)->get();
+        $discount = Invoic::where('student_id', $student->id)->first('discount');
+        return view('invoice.show', compact(['invoices', 'student', 'paidinvoice', 'discount']));
     }
 
     /**
@@ -92,12 +100,15 @@ class InvoicController extends Controller
         //
     }
 
-    public function details(Invoic $invoic, $id)
+    public function details($id)
     {
-        $paidinvoice = Invoic::where('student_id', $id)->sum('amount');
         $stdinvoice= Invoic::where('id', $id)->first();
         $student = Student::where('id', $stdinvoice->student_id )->first();
-        return view('invoice.print', compact(['stdinvoice', 'student', 'paidinvoice']));
+        $paidinvoice = Invoic::where('invoics.id', $id)->sum('amount');
+        $allamount = Invoic::where('student_id', $student->id)->sum('amount');
+        $discount = Invoic::where('student_id', $student->id)->first('discount');
+        // dd($allamount);
+        return view('invoice.print', compact(['stdinvoice', 'student', 'paidinvoice', 'discount', 'allamount']));
     }
 
     /**

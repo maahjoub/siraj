@@ -20,7 +20,7 @@ class Student extends Model
     }
     public function invoice()
     {
-        return $this->belongsTo(Invoic::class);
+        return $this->hasMany(Invoic::class);
     }
     public function grad()
     {

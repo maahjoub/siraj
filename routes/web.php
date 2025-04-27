@@ -38,6 +38,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('student/search', [StudentController::class, 'search'])->name('student.search');
     Route::get('/students-by-date', [StudentController::class, 'getByDate'])->name('students.byDate');
     Route::get('/payment/invoice', [InvoicController::class, 'payment'])->name('invoice.payment');
+    Route::post('/search/invoice', [InvoicController::class, 'search'])->name('search');
     
     // Resource Routes
     Route::resource('student', StudentController::class);

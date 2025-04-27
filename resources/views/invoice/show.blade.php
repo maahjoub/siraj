@@ -32,7 +32,7 @@
                                     <td>{{ $invoice->note }}</td>
                                     <td>
                                         <a href="{{ route('invoice.edit', $invoice->id) }}" class="btn btn-info btn-sm d-inline-flex"><i class="fa fa-edit text-dark"></i></a>
-                                        <a href="{{ route('show.invoice', $invoice->id) }}" class="btn btn-secondary btn-sm d-inline-flex"><i class="fa fa-eye"></i></a>
+                                        <a href="{{ route('show.invoice', $invoice->id ) }}" class="btn btn-secondary btn-sm d-inline-flex"><i class="fa fa-eye"></i></a>
                                         <form action="{{ route('invoice.destroy', $invoice->id) }}" class=" d-inline-flex" method="post">
                                             @csrf
                                             @method('delete')
@@ -42,7 +42,7 @@
                                 </tr>
                             @endforeach
                             </tbody>
-                            {{ $invoices->links() }}
+                            
                         </table>
                     </div>
                 </div>

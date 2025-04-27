@@ -27,6 +27,12 @@
                                 <input type="text" class="form-control" name="money" placeholder="برجاءادخال مبلغ الرسوم">
                                 @error('money')<div class="alert alert-danger w-100 me-1">{{ $message}}</div>@enderror
                             </div>
+                            
+                              <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon3"> التخفيض</span>
+                                <input type="text" class="form-control" name="discount" placeholder="برجاءادخال التخفيض">
+                                @error('discount')<div class="alert alert-danger w-100 me-1">{{ $message}}</div>@enderror
+                            </div>
 
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon3">اختيار وسيلة الدفع</span>
@@ -39,6 +45,13 @@
                                 @error('phase')<div class="alert alert-danger w-100 me-1">{{ $message}}</div>@enderror
                             </div>
 
+                             </div>
+                            
+                              <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon3"> رقم العملية</span>
+                                <input type="text" class="form-control" name="payment_number" placeholder="برجاءادخال رقم العملية">
+                                @error('payment_number')<div class="alert alert-danger w-100 me-1">{{ $message}}</div>@enderror
+                            </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon3">ملاحظات </span>
                                 <textarea type="text" class="form-control" name="note" placeholder="برجاء اضافة ملاحظات او تعليقات"></textarea>

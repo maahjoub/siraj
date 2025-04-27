@@ -11,7 +11,6 @@
                 <span class="fs-4 text-center d-block">مدرسة السراج المنير الخاصة</span>
             <div class="d-flex justify-content-around bg-info">
                 <h2 class="text-center p-2 m-2">ايصال سداد رسوم</h2>
-                <span class="invoice-id fs-3 p-2 m-2 text-center"> رقم الايصال :   {{ $stdinvoice->uuid }}</span>
             </div>
             <div class="name">
                 <table class="table border pay-border table-bordered ">
@@ -19,6 +18,8 @@
                     <tr>
                         <th>    اسم الرسوم    </th>
                         <th>    {{ $stdinvoice->name }}</th>
+                         <th> رقم الايصال    </th>
+                         <th>{{ $stdinvoice->uuid }}</th>
                     </tr>
 
                     <tr>
@@ -36,20 +37,24 @@
                     </tr>
                     <tr>
                         <th>    التحفيض</th>
-                        <th>    {{ $stdinvoice->discount }} </th></th>
+                        <th>   @if (isset($discount->discount))
+                             {{ $discount->discount }}
+                             @else
+                             0
+                        @endif </th></th>
                         <th>    المبلغ المتبقي   </th>
-                        <th>    {{(700000 - $paidinvoice) }} </th></th>
+                        <th>  {{ 700000 - $discount->discount - $allamount }}  </th></th>
                     </tr>
                     
                     <tr>
                         <th>    طريقة الدفع     </th>
-                        <th>     {{ $stdinvoice->payment_method }}  </th></th>
+                        <th>     {{ $stdinvoice->payment_method }}  
+                        
+                       {{ " -  رقم العملية - "  . $stdinvoice->payment_number ?? "" }}  </th></th>
+                        <th>  تاريخ الدفع    </th>
+                        <th>    {{ \Carbon\Carbon::parse($stdinvoice->created_at)->format('d-m-Y') }}     </th>
                     </tr>
 
-                    <tr>
-                        <th>  تاريخ الدفع    </th>
-                        <th>    {{ $stdinvoice->created_at->format('d-m-Y') }}     </th>
-                    </tr>
                     </thead>
                 </table>
             </div>
@@ -62,49 +67,58 @@
     </div>
     <div class="hide">
         <div class="row">
-            <div class="col-md-6">
-                <h2 class="text-center m-2 mt-0">ولاية القضارف</h2>
-                <h3 class="text-center m-2">وزارة التربية والتوجية  - إدارة التعليم غير الحكومي</h3>
+            <div class="col-md-6"> 
+            <h2 class="text-center m-2">ولاية القضارف</h2>    
+           <h3 class="text-center m-2">وزارة التربية والتوجية  - إدارة التعليم غير الحكومي</h3>
                 <span class="fs-4 text-center d-block">مدرسة السراج المنير الخاصة</span>
-                <div class="d-flex justify-content-around bg-info">
-                    <h2 class="text-center p-2 m-2">ايصال سداد رسوم</h2>
-                    <span class="invoice-id fs-3 p-2 m-2 text-center"> رقم الايصال :   {{ $stdinvoice->uuid }}</span>
-                </div>
-                <div class="name">
-                    <table class="table border table-bordered bg-secondary text-white">
-                        <tshead>
-                        <tr>
-                            <th>    اسم الرسوم    </th>
-                            <th>    {{ $stdinvoice->name }}</th>
-                        </tr>
-
-                        <tr>
-                            <th>    رقم الطالب    </th>
-                            <th>    {{ $student->name }} </th></th>
-                            <th>    اسم الطالب    </th>
-                            <th>    {{ $student->Std_number }} </th></th>
-                        </tr>
-
-                        <tr>
-                            <th>    المبلغ المدفوع   </th>
-                            <th>    {{ $stdinvoice->amount }} </th></th>
-                            <th>    المبلغ المتبقي   </th>
-                            <th>{{(700000 - $paidinvoice) }} </th></th>
-                        </tr> 
-
-                        <tr>
-                            <th>    طريقة الدفع     </th>
-                            <th>     {{ $stdinvoice->payment_method }}  </th></th>
-                        </tr>
-
-                        <tr>
-                            <th>  تاريخ الدفع    </th>
-                            <th>     {{ $stdinvoice->created_at->format('d-m-Y') }}     </th>
-                        </tr>
-                        </tshead>
-                    </table>
-                </div>
+            <div class="d-flex justify-content-around bg-info">
+                <h2 class="text-center p-2 m-2">ايصال سداد رسوم</h2>
             </div>
+            <div class="name">
+                <table class="table border pay-border table-bordered ">
+                    <thead>
+                    <tr>
+                        <th>    اسم الرسوم    </th>
+                        <th>    {{ $stdinvoice->name }}</th>
+                         <th> رقم الايصال    </th>
+                         <th>{{ $stdinvoice->uuid }}</th>
+                    </tr>
+
+                    <tr>
+                        <th>    اسم الطالب    </th>
+                        <th>    {{ $student->name }} </th></th>
+                        <th>    رقم الطالب    </th>
+                        <th>    {{ $student->Std_number }} </th></th>
+                    </tr>
+
+                    <tr>
+                        <th>    المبلغ الكلي   </th>
+                        <th>    700000 </th></th>
+                        <th>    المبلغ المدفوع   </th>
+                        <th>    {{ $stdinvoice->amount }} </th></th>
+                    </tr>
+                    <tr>
+                        <th>    التحفيض</th>
+                        <th>   @if (isset($discount->discount))
+                             {{ $discount->discount }}
+                        @endif </th></th>
+                        <th>    المبلغ المتبقي   </th>
+                        <th>  {{ 700000 - $discount->discount - $allamount }}  </th></th>
+                    </tr>
+                    
+                    <tr>
+                        <th>    طريقة الدفع     </th>
+                        <th>     {{ $stdinvoice->payment_method }}  
+                        
+                       {{ " -  رقم العملية - "  .  $stdinvoice->payment_number ?? "" }}  </th></th>
+                        <th>  تاريخ الدفع    </th>
+                        <th>    {{ \Carbon\Carbon::parse($stdinvoice->created_at)->format('d-m-Y') }}     </th>
+                    </tr>
+
+                    </thead>
+                </table>
+            </div>
+        </div>
         </div>
     </div>
 </div>

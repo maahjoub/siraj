@@ -27,9 +27,23 @@ class Invoic extends Model
             })
             ->toArray();
     }
-    public function Students()
-    {
-        return $this->hasMany(Student::class);
-    }
+ 
+        /**
+         * Get the student that owns the Invoic
+         *
+         * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+         */
+        public function student(): BelongsTo
+        {
+            return $this->belongsTo(student::class);
+        }
+    
+        public function getCreatedAtAttribute($value)
+        {
+            return \Carbon\Carbon::parse($value)->format('Y-m-d');
+        }
+        protected $dates = [
+            'created_at', 'updated_at',
+         ];
 
 }
