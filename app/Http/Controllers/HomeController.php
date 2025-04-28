@@ -12,10 +12,14 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $amount = Income::sum('total');
-        $amount = number_format($amount, 0, ',');
+        $discount = Invoic::sum('discount');
+        $amount =  Income::sum('total');
+        $amount_after_discount = (int)$amount - (int)$discount;
+        $remind = number_format((int)$amount - (int)$discount, 0, ',');
         $data = [
-            'allAmount' => $amount,
+            'amount' => $amount,
+            'remind' => $remind,
+            'discount' => $discount,
             'studentCount' => Student::count(),
             'boyCount' => Student::where('gender_id', 1)->count(),
             'girlCount' => Student::where('gender_id', 2)->count(),

@@ -24,7 +24,7 @@
                         </div>
                         <div class="col-md-3 m-1 alert alert-info">
                             <h3>الميزانية المتوقعة</h3>
-                            <a class="text-decoration-none text-primary" href="#"><span class="count">{{ $data['allAmount'] }}</span></a>
+                            <a class="text-decoration-none text-primary" href="#"><span class="count">{{ $data['remind']  }}</span></a>
                         </div>
 {{--                        <div class="col-md-2 m-1 alert alert-info">test</div>--}}
                         </div>
