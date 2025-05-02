@@ -50,8 +50,6 @@ class StudentController extends Controller
         // dd($request->all());
         $validation = $this->validate($request, [
             'name'                      => ['required', 'string'],
-            'date_of_birth'             => ['required', 'string'],
-            'national_id'               => ['required', 'numeric'],
             'gender'                    => ['required'],
             'phase'                     => ['required'],
             'classes'                   => ['required'],
@@ -60,10 +58,7 @@ class StudentController extends Controller
         try {
             $student = Student::create([
                 'name' => $request->name,
-                'date_of_birth' => $request->date_of_birth,
-                'nationality_number' => $request->national_id,
                 'mobile' => $request->phone,
-                // 'grad_id' => $request->grad,
                 'gender_id' => $request->gender,
                 'class_rom_id' => $request->classes,
                 'phase_id' => $request->phase,
@@ -101,11 +96,7 @@ class StudentController extends Controller
         return view('student.show', compact(['student']));
     }
     
-    public function showAllClass($id)
-    {
-        $classes = ClassRom::where('phase_id', $id)->get();
-        return view('student.allclass', compact(['classes']));
-    }
+
     public function getByDate(Request $request)
     {
         $date = $request->input('date');
@@ -118,26 +109,7 @@ class StudentController extends Controller
 
         return response()->json($students);
     }
-    
-    public function showAllstudent ($id)
-    {
-        $students = Student::where('class_rom_id', $id)->paginate();
-        return view('student.allstudent', compact(['students']));
-    }
 
-    public function showPhases()
-    {
-        $grades = Phase::with('classRoom')->get();
-        
-        return view('student.classRoom', compact(['grades']));
-    }
-
-    public function showAll($id)
-    {
-        $classes = ClassRom::where('phase_id', $id)->get();
-        
-        return view('student.classRoom', compact(['classes']));
-    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -192,5 +164,29 @@ class StudentController extends Controller
     {
         $student->delete();
         return redirect()->back();
+    }
+
+    public function chose()
+    {
+        return view('student.type');
+    }
+    
+
+    public function grad()
+    {
+        $grades = Phase::get();
+        return view('student.classRoom', compact('grades'));
+    }
+
+    public function classes($id)
+    {
+        $classes = ClassRom::where('phase_id', $id)->get();
+        // return $classes;
+        return view('student.allclass', compact('classes'));
+    }
+    public function showAll($id)
+    {
+        $students = Student::where('class_rom_id', $id)->get();
+        return view('student.allstudent', compact('students'));
     }
 }

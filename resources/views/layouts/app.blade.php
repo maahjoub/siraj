@@ -44,7 +44,7 @@
                       عمليات الطلاب
                     </a>
                     <ul class="dropdown-menu text-center">
-                        <li><a class="dropdown-item" href="{{ route('all.grade') }}">عرض كل الطلاب </a></li>
+                        <li><a class="dropdown-item" href="{{ route('chose.gender') }}">عرض كل الطلاب </a></li>
                         <li><a class="dropdown-item" href="{{ route('student.create') }}">اضاقة تلميذ</a></li>
                         <li><a class="dropdown-item" href="{{ route('student.create') }}"> عرض اقساط الطالب</a></li>
                     </ul>

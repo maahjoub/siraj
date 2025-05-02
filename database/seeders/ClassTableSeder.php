@@ -20,12 +20,12 @@ class ClassTableSeder extends Seeder
         DB::table('class_roms')->delete();
 
         $classes = [
-            'الصف الأول اساس',
-            'الصف الثاني اساس',
-            'الصف الثالث اساس',
-            'الصف الرابع اساس',
-            'الصف الخامس اساس',
-            'الصف السادس اساس',
+            'الصف الأول الابتدائي',
+            'الصف الثاني الابتدائي',
+            'الصف الثالث الابتدائي',
+            'الصف الرابع الابتدائي',
+            'الصف الخامس الابتدائي',
+            'الصف السادس الابتدائي',
         ];
         foreach ($classes as $key=>$class) {
             ClassRom::create([
@@ -47,16 +47,16 @@ class ClassTableSeder extends Seeder
             ]);
         }
 
-        $classes = [
-            'الصف الأول الثانوي',
-            'الصف الثاني الثانوي',
-            'الصف الثالث الثانوي',
-        ];
-        foreach ($classes as $key=>$class) {
-            ClassRom::create([
-                'name' => $class,
-                'phase_id' => 3
-            ]);
-        }
+        // $classes = [
+        //     'الصف الأول الثانوي',
+        //     'الصف الثاني الثانوي',
+        //     'الصف الثالث الثانوي',
+        // ];
+        // foreach ($classes as $key=>$class) {
+        //     ClassRom::create([
+        //         'name' => $class,
+        //         'phase_id' => 3
+        //     ]);
+        // }
     }
 }

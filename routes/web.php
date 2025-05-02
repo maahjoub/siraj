@@ -28,10 +28,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
     Route::get('/stdboyes', [HomeController::class, 'boy'])->name('all.boy');
     Route::get('/stdgirl', [HomeController::class, 'girl'])->name('all.girl');
-    Route::get('/all/{class}/class', [StudentController::class, 'showAllClass'])->name('all.class');
-    Route::get('/all/grade', [StudentController::class, 'showPhases'])->name('all.grade');
     Route::get('/create/{id}', [InvoicController::class, 'create'])->name('create.invoice');
-    Route::get('/all/{id}/student', [StudentController::class, 'showAllstudent'])->name('all.student');
     Route::get('/invoice/{id}/show', [InvoicController::class, 'details'])->name('show.invoice');
     Route::post('/pay/{id}', [InvoicController::class, 'PayInvoice'])->name('invoice.pay');
     Route::get('/base-stage', [HomeController::class, 'bDetails'])->name('base.details');
@@ -44,5 +41,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('student', StudentController::class);
     Route::resource('invoice', InvoicController::class);
     Route::resource('report', ReportController::class);
+
+    // get all student by chose class rom and gender
+    Route::get('chose', [StudentController::class, 'chose'])->name('chose.gender');
+    Route::get('chose/grad', [StudentController::class, 'grad'])->name('chose.grad');
+    Route::get('classes/{id}', [StudentController::class, 'classes'])->name('classes');
+    Route::get('allstudent/{id}', [StudentController::class, 'showAll'])->name('all.student');
 
 });

@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('date_of_birth');
-            $table->string('nationality_number');
+            // $table->string('date_of_birth');
+            // $table->string('nationality_number');
             $table->string('Std_number');
             $table->string('mobile');
             // $table->foreignId('grad_id')->unsigned()->references('id')

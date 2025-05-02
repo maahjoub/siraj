@@ -18,21 +18,13 @@
                                 <input type="text" class="form-control" name="name" placeholder="برجاءادخال اسم التلمبذ">
                                 @error('name')<div class="alert alert-danger w-100 me-1">{{ $message}}</div>@enderror
                             </div>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon3">الرقم الوطني</span>
-                                <input type="text" class="form-control" name="national_id" placeholder="برجاءادخال الرقم الوطني">
-                                @error('national_id')<div class="alert alert-danger w-100 me-1">{{ $message}}</div>@enderror
-                            </div>
+                          
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon3">رقم الهاتف</span>
                                 <input type="text" class="form-control" name="phone" placeholder="برجاءادخال رقم الهاتف">
                                 @error('phone')<div class="alert alert-danger w-100 me-1">{{ $message}}</div>@enderror
                             </div>
-                              <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon3">تاريخ ميلاد التلميذ</span>
-                                <input type="text" data-provide="datepicker" class="form-control" name="date_of_birth" placeholder="برجاءادخال تاريخ الميلاد">
-                                @error('date_of_birth')<div class="alert alert-danger w-100 me-1">{{ $message}}</div>@enderror
-                            </div>
+                            
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon3">اختيار النوع</span>
                                 <select class="form-control p-1 m-1" name="gender">
@@ -53,16 +45,7 @@
                                 </select>
                                 @error('phase')<div class="alert alert-danger w-100 me-1">{{ $message}}</div>@enderror
                             </div>
-                            {{-- <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon3">اختيار القسم</span>
-                                <select class="form-control p-1 m-1" name="grad">
-                                    <option value="null" selected disabled>برجاء اختيار القسم</option>
-                                    @foreach($grads as $grad)
-                                        <option value="{{ $grad->id }}">{{ $grad->name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('grad')<div class="alert alert-danger w-100 me-1">{{ $message}}</div>@enderror
-                            </div> --}}
+                          
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon3">اختيار الصف</span>
                                 <select class="form-control p-1 m-1" name="classes">

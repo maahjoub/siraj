@@ -50,7 +50,7 @@
                         <th>    طريقة الدفع     </th>
                         <th>     {{ $stdinvoice->payment_method }}  
                         
-                       {{ " -  رقم العملية - "  . $stdinvoice->payment_number ?? "" }}  </th></th>
+                       {{ " -  رقم العملية - "  . $stdinvoice->payment_number ?? "كاش" }}  </th></th>
                         <th>  تاريخ الدفع    </th>
                         <th>    {{ \Carbon\Carbon::parse($stdinvoice->created_at)->format('d-m-Y') }}     </th>
                     </tr>
@@ -110,7 +110,7 @@
                         <th>    طريقة الدفع     </th>
                         <th>     {{ $stdinvoice->payment_method }}  
                         
-                       {{ " -  رقم العملية - "  .  $stdinvoice->payment_number ?? "" }}  </th></th>
+                       {{ " -  رقم العملية - "  .  $stdinvoice->payment_number ?? "كاش" }}  </th></th>
                         <th>  تاريخ الدفع    </th>
                         <th>    {{ \Carbon\Carbon::parse($stdinvoice->created_at)->format('d-m-Y') }}     </th>
                     </tr>
