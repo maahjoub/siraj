@@ -13,7 +13,7 @@
                             @foreach($grades as $grade)
                             <div class="col-md-3 m-1 alert alert-danger">
                                 {{-- <h3>عدد الطلاب الكلي</h3> --}}
-                                <a class="text-decoration-none text-danger" href="{{ route('classes', $grade->id) }}"><span class="count">{{ $grade->name }}</span></a>
+                                <a class="text-decoration-none text-danger" href="{{ route('classes', [$type =>$type ,$grade->id]) }}"><span class="count">{{ $grade->name }}</span></a>
                             </div>
                             @endforeach
                         </div>

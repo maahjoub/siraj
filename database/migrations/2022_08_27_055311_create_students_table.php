@@ -16,12 +16,8 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            // $table->string('date_of_birth');
-            // $table->string('nationality_number');
             $table->string('Std_number');
             $table->string('mobile');
-            // $table->foreignId('grad_id')->unsigned()->references('id')
-            //     ->on('grads')->cascadeOnDelete();
             $table->foreignId('gender_id')->unsigned()->references('id')
                 ->on('genders')->cascadeOnDelete();
             $table->foreignId('class_rom_id')->unsigned()->references('id')

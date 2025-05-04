@@ -43,3 +43,6 @@
     opacity: 0.1;
     z-index: -1;
 }
+.dataTables_filter input{
+width: 350px;
+}

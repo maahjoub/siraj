@@ -14,7 +14,7 @@
                 <div class="card text-white bg-success mb-3 mx-auto" style="min-width:18rem;"> 
                     <div class="card-body">
                       <h5 class="card-title">
-                        <a class="text-decoration-none text-danger" href="{{ route('all.student', $class->id) }}"><span class="count">{{ $class->name }}</span></a>
+                        <a class="text-decoration-none text-danger" href="{{ route('all.student', [$class->id , $id] ) }}"><span class="count">{{ $class->name }}</span></a>
                       </h5>
                     </div>
                   </div>

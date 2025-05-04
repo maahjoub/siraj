@@ -11,7 +11,7 @@
                         <h2>قائمة الطلاب</h2>
                     </div>
                     <div class="card-body">
-                        <table class="border table-bordered table-responsivev table-sm w-100 p-2 text-center">
+                        <table id="datatable" class="table  table-hover table-sm table-bordered p-0">
                             <thead>
                             <tr>
                                 <th>#</th>

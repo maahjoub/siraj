@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('uuid');
             $table->string('name');
-            $table->bigInteger('amount');
+            $table->Integer('amount');
             $table->double('discount', 8,2)->default(0)->nullable();
             $table->text('note')->nullable();
-            $table->bigInteger('payment_number')->nullable();
+            $table->Integer('payment_number')->nullable();
             $table->enum('payment_method', ['كاش', 'بنكك', 'اوكاش', 'فوري', 'اخري'])->nullable();
             $table->foreignId('student_id')->references('id')
                 ->on('students')->cascadeOnDelete();

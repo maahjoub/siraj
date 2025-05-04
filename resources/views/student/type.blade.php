@@ -12,12 +12,12 @@
                         <div class="d-flex justify-content-center">
                             <div class="col-md-3 m-1 alert alert-danger">
                                 {{-- <h3>عدد الطلاب الكلي</h3> --}}
-                                <a class="text-decoration-none text-danger" href="{{ route('chose.grad') }}"><span class="count">عرض الطلاب  </span></a>
+                                <a class="text-decoration-none text-danger" href="{{ route('chose.grad', 1) }}"><span class="count">عرض الطلاب  </span></a>
                             </div>
 
                               <div class="col-md-3 m-1 alert alert-danger">
                                 {{-- <h3>عدد الطلاب الكلي</h3> --}}
-                                <a class="text-decoration-none text-danger" href="{{ route('chose.grad') }}"><span class="count">عرض الطالبات  </span></a>
+                                <a class="text-decoration-none text-danger" href="{{ route('chose.grad', 2) }}"><span class="count">عرض الطالبات  </span></a>
                             </div>
                         </div>
                     </div>

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('incomes', function (Blueprint $table) {
             $table->id();
-            $table->double('total');
+            $table->integer('total');
             $table->timestamps();
         });
     }

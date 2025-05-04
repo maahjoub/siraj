@@ -172,21 +172,20 @@ class StudentController extends Controller
     }
     
 
-    public function grad()
+    public function grad($type)
     {
         $grades = Phase::get();
-        return view('student.classRoom', compact('grades'));
+        return view('student.classRoom', compact('grades', 'type'));
     }
 
-    public function classes($id)
+    public function classes($id, $type)
     {
-        $classes = ClassRom::where('phase_id', $id)->get();
-        // return $classes;
-        return view('student.allclass', compact('classes'));
+        $classes = ClassRom::where('phase_id', $type)->get();
+        return view('student.allclass', compact('classes', 'id'));
     }
-    public function showAll($id)
+    public function showAll($id, $g_id)
     {
-        $students = Student::where('class_rom_id', $id)->get();
+        $students = Student::where('class_rom_id', $id)->where('gender_id', $g_id)->get();
         return view('student.allstudent', compact('students'));
     }
 }

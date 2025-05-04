@@ -19,16 +19,17 @@ class ReportController extends Controller
         
         $total = Income::sum('total');
         $discount = Invoic::sum('discount');
-        $num_discount = number_format($total - $discount, 0, ',');
+        $num_discount = number_format(str_pad(intval($total - $discount), 6, '0'), 0, '0,');
         $formaated_total = number_format($total, 0, ',');
         $amount = Invoic::sum('amount');
 
         $formated_amount = number_format($amount, 0, ',');
-        $remind = (int)$num_discount - (int)$formated_amount;
+        $remind = intval($num_discount) - intval($formated_amount);
         $minos = $total - (int)$amount;
         $f_minos = number_format($minos, 0, ',');
-       
-        return view('report.index', compact('formaated_total', 'formated_amount', 'f_minos' , 'num_discount' , 'discount', 'remind'));
+       $f_discount = number_format($discount, 0, ',');
+       $f_remind = $total - $amount - $discount;
+        return view('report.index', compact('formaated_total', 'formated_amount', 'f_minos' , 'num_discount' , 'f_discount', 'f_remind'));
     }
 
     /**

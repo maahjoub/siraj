@@ -44,8 +44,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     // get all student by chose class rom and gender
     Route::get('chose', [StudentController::class, 'chose'])->name('chose.gender');
-    Route::get('chose/grad', [StudentController::class, 'grad'])->name('chose.grad');
-    Route::get('classes/{id}', [StudentController::class, 'classes'])->name('classes');
-    Route::get('allstudent/{id}', [StudentController::class, 'showAll'])->name('all.student');
+    Route::get('chose/{type}/grad', [StudentController::class, 'grad'])->name('chose.grad');
+    Route::get('{type}/classes/{id}', [StudentController::class, 'classes'])->name('classes');
+    Route::get('allstudent/{id}/{g_id}', [StudentController::class, 'showAll'])->name('all.student');
 
 });
